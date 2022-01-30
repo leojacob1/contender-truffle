@@ -2,16 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Card is ERC721 {
+contract Card is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
     constructor() public ERC721("Card", "CRD") {}
 
-    function awardItem(address player)
+    function awardItem(address player, string memory tokenURI)
         public
         returns (uint256)
     {
@@ -19,7 +19,7 @@ contract Card is ERC721 {
 
         uint256 newItemId = _tokenIds.current();
         _mint(player, newItemId);
-        // _setTokenURI(newItemId, tokenURI);
+        _setTokenURI(newItemId, tokenURI);
 
         return newItemId;
     }
