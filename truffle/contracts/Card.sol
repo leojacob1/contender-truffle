@@ -1,70 +1,26 @@
-// contracts/GameItem.sol
+//Contract based on [https://docs.openzeppelin.com/contracts/3.x/erc721](https://docs.openzeppelin.com/contracts/3.x/erc721)
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-
-contract Card is ERC721, Ownable {
+contract Card is ERC721URIStorage {
     using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIds;
-    mapping(string => uint8) hashes;
-    using Strings for uint256;
-        
-    // Optional mapping for token URIs
-    mapping (uint256 => string) private _tokenURIs;
 
-    // Base URI
-    string private _baseURIextended;
     constructor() public ERC721("Card", "CRD") {}
 
-    
-    function setBaseURI(string memory baseURI_) external onlyOwner() {
-        _baseURIextended = baseURI_;
-    }
-    
-    function _setTokenURI(uint tokenId, string memory _tokenURI) internal virtual {
-        require(_exists(tokenId), "ERC721Metadata: URI set of nonexistent token");
-        _tokenURIs[tokenId] = _tokenURI;
-    }
-    
-    function _baseURI() internal view virtual override returns (string memory) {
-        return _baseURIextended;
-    }
-    
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-
-        string memory _tokenURI = _tokenURIs[tokenId];
-        string memory base = _baseURI();
-        
-        // If there is no base URI, return the token URI.
-        if (bytes(base).length == 0) {
-            return _tokenURI;
-        }
-        // If both are set, concatenate the baseURI and tokenURI (via abi.encodePacked).
-        if (bytes(_tokenURI).length > 0) {
-            return string(abi.encodePacked(base, _tokenURI));
-        }
-        // If there is a baseURI but no tokenURI, concatenate the tokenID to the baseURI.
-        return string(abi.encodePacked(base, tokenId.toString()));
-    }
-
-
-    function awardItem(address player, string memory hash, string memory metadata)
+    function mintNFT(address recipient, string memory tokenURI)
         public
         returns (uint256)
     {
-        require(hashes[hash] != 1);
-        hashes[hash] = 1;
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();
-        _mint(player, newItemId);
-        _setTokenURI(newItemId, metadata);
+        _mint(recipient, newItemId);
+        _setTokenURI(newItemId, tokenURI);
 
         return newItemId;
     }
