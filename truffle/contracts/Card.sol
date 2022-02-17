@@ -10,7 +10,37 @@ contract Card is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
+    struct Collection {
+        string id;
+        string collectionName;
+        string athleteId;
+        uint maxSize;
+        uint numMints;
+        address addressToPay;
+    }
+
+    Collection[] public collections;
+
+    event NewCollection(
+        string collectionId,
+        string collectionName, 
+        string indexed athleteId, 
+        uint maxSize, 
+        address indexed addressToPay
+    );
+
     constructor() public ERC721("Card", "CRD") {}
+
+    function createCollection(
+        string memory collectionId,
+        string memory collectionName, 
+        string memory athleteId, 
+        uint maxSize, 
+        address addressToPay) external {
+        collections.push(Collection(collectionId, collectionName, athleteId, maxSize, 0, addressToPay));
+        emit NewCollection(collectionId, collectionName, athleteId, maxSize, addressToPay);
+    }
+
 
     function mintNFT(address recipient, string memory tokenURI)
         public
