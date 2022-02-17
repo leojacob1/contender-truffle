@@ -13,7 +13,7 @@ contract Card is ERC721URIStorage {
     struct Collection {
         string id;
         string collectionName;
-        string athleteId;
+        address athleteAddress;
         uint maxSize;
         uint numMints;
         address addressToPay;
@@ -24,7 +24,7 @@ contract Card is ERC721URIStorage {
     event NewCollection(
         string collectionId,
         string collectionName, 
-        string indexed athleteId, 
+        address indexed athleteAddress, 
         uint maxSize, 
         address indexed addressToPay
     );
@@ -34,11 +34,11 @@ contract Card is ERC721URIStorage {
     function createCollection(
         string memory collectionId,
         string memory collectionName, 
-        string memory athleteId, 
+        address athleteAddress, 
         uint maxSize, 
         address addressToPay) external {
-        collections.push(Collection(collectionId, collectionName, athleteId, maxSize, 0, addressToPay));
-        emit NewCollection(collectionId, collectionName, athleteId, maxSize, addressToPay);
+        collections.push(Collection(collectionId, collectionName, athleteAddress, maxSize, 0, addressToPay));
+        emit NewCollection(collectionId, collectionName, athleteAddress, maxSize, addressToPay);
     }
 
 
