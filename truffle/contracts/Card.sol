@@ -62,10 +62,7 @@ contract Card is ERC721URIStorage {
         );
     }
 
-    function mintNFT(address recipient, string memory tokenURI)
-        public
-        returns (uint256)
-    {
+    function mintNFT(string memory tokenURI) public returns (uint256) {
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();
