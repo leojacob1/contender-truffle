@@ -14,33 +14,53 @@ contract Card is ERC721URIStorage {
         string id;
         string collectionName;
         address athleteAddress;
-        uint maxSize;
-        uint numMints;
+        uint256 maxSize;
+        uint256 numMints;
         address addressToPay;
+        string imageIpfsHash;
     }
 
     Collection[] public collections;
 
     event NewCollection(
         string collectionId,
-        string collectionName, 
-        address indexed athleteAddress, 
-        uint maxSize, 
-        address indexed addressToPay
+        string collectionName,
+        address indexed athleteAddress,
+        uint256 maxSize,
+        address indexed addressToPay,
+        string imageIpfsHash
     );
 
     constructor() public ERC721("Card", "CRD") {}
 
     function createCollection(
         string memory collectionId,
-        string memory collectionName, 
-        address athleteAddress, 
-        uint maxSize, 
-        address addressToPay) external {
-        collections.push(Collection(collectionId, collectionName, athleteAddress, maxSize, 0, addressToPay));
-        emit NewCollection(collectionId, collectionName, athleteAddress, maxSize, addressToPay);
+        string memory collectionName,
+        address athleteAddress,
+        uint256 maxSize,
+        address addressToPay,
+        string memory imageIpfsHash
+    ) external {
+        collections.push(
+            Collection(
+                collectionId,
+                collectionName,
+                athleteAddress,
+                maxSize,
+                0,
+                addressToPay,
+                imageIpfsHash
+            )
+        );
+        emit NewCollection(
+            collectionId,
+            collectionName,
+            athleteAddress,
+            maxSize,
+            addressToPay,
+            imageIpfsHash
+        );
     }
-
 
     function mintNFT(address recipient, string memory tokenURI)
         public
