@@ -10,65 +10,86 @@ contract Card is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    struct Collection {
-        string id;
-        string collectionName;
-        address athleteAddress;
-        uint256 maxSize;
-        uint256 numMints;
-        address addressToPay;
-        string imageIpfsHash;
-    }
-
-    Collection[] public collections;
+    mapping(string => Counters.Counter) private collectionIdToCounter;
 
     event NewCollection(
-        string collectionId,
-        string collectionName,
+        string id,
+        string name,
+        string description,
         address indexed athleteAddress,
+        uint256 price,
         uint256 maxSize,
         address indexed addressToPay,
-        string imageIpfsHash
+        string imageIpfsHash,
+        string metadataIpfsHash
     );
 
     constructor() public ERC721("Card", "CRD") {}
 
     function createCollection(
-        string memory collectionId,
-        string memory collectionName,
+        string memory id,
+        string memory name,
+        string memory description,
         address athleteAddress,
+        uint256 price,
         uint256 maxSize,
         address addressToPay,
-        string memory imageIpfsHash
+        string memory imageIpfsHash,
+        string memory metadataIpfsHash
     ) external {
-        collections.push(
-            Collection(
-                collectionId,
-                collectionName,
-                athleteAddress,
-                maxSize,
-                0,
-                addressToPay,
-                imageIpfsHash
-            )
-        );
+        Counters.Counter memory initTokenId;
+        collectionIdToCounter[id] = initTokenId;
         emit NewCollection(
-            collectionId,
-            collectionName,
+            id,
+            name,
+            description,
             athleteAddress,
+            price,
             maxSize,
             addressToPay,
-            imageIpfsHash
+            imageIpfsHash,
+            metadataIpfsHash
         );
     }
 
-    function mintNFT(string memory tokenURI) public returns (uint256) {
-        _tokenIds.increment();
+    function getEventCounters(string[] memory eventIds)
+        external
+        view
+        returns (uint256[] memory)
+    {
+        uint256[] memory requestedCollectionCounters;
+        for (uint256 i = 0; i < eventIds.length; i++) {
+            requestedCollectionCounters[i] = collectionIdToCounter[eventIds[i]]
+                ._value;
+        }
+        return requestedCollectionCounters;
+    }
 
-        uint256 newItemId = _tokenIds.current();
-        _mint(recipient, newItemId);
+    function mintNFT(
+        string memory collectionId,
+        uint256 price,
+        uint256 maxSize,
+        address payable addressToPay,
+        string memory tokenURI
+    ) public payable returns (uint256) {
+        require(msg.value >= price, "Insufficient funds");
+        require(
+            addressToPay == address(addressToPay),
+            "Invalid address to pay"
+        );
+        require(
+            collectionIdToCounter[collectionId]._value >= maxSize,
+            "Collection is sold out"
+        );
+        collectionIdToCounter[collectionId].increment();
+
+        uint256 newItemId = collectionIdToCounter[collectionId].current();
+        _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, tokenURI);
-
+        addressToPay.transfer(price);
+        if (msg.value > price) {
+            payable(msg.sender).transfer(msg.value - price);
+        }
         return newItemId;
     }
 }
