@@ -7,14 +7,14 @@ import "openzeppelin-contracts/contracts/utils/Counters.sol";
 import "openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "clones-with-immutable-args/Clone.sol";
 
-contract Collection is ERC721URIStorage, Clone {
+contract Collection is Clone, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenId;
-    address athleteAddress = _getArgAddress(0);
-    uint256 price = _getArgUint256(40);
-    uint256 maxSize = _getArgUint256(72);
-    address addressToPay = _getArgAddress(20);
-    bytes32 metadataIpfsHash = bytes32(_getArgUint256(104));
+    address athleteAddress;
+    uint256 price;
+    uint256 maxSize;
+    address addressToPay;
+    bytes32 metadataIpfsHash;
 
     function append(string memory a, string memory b)
         internal
@@ -42,7 +42,32 @@ contract Collection is ERC721URIStorage, Clone {
         return _tokenId._value;
     }
 
+    function getAthleteAddress() external view returns (address) {
+        return athleteAddress;
+    }
+
+    function getAddressToPay() external view returns (address) {
+        return addressToPay;
+    }
+
+    function getPrice() external view returns (uint256) {
+        return price;
+    }
+
+    function getMaxSize() external view returns (uint256) {
+        return maxSize;
+    }
+
+    function getMetadataIpfsHash() external view returns (string memory) {
+        return bytes32ToStr(metadataIpfsHash);
+    }
+
     function mintNFT() external payable returns (uint256) {
+        athleteAddress = _getArgAddress(0);
+        price = _getArgUint256(40);
+        maxSize = _getArgUint256(72);
+        addressToPay = _getArgAddress(20);
+        metadataIpfsHash = bytes32(_getArgUint256(104));
         require(msg.value == price, "Insufficient funds");
         require(_tokenId._value < maxSize, "Collection is sold out");
         _tokenId.increment();
@@ -51,10 +76,7 @@ contract Collection is ERC721URIStorage, Clone {
         _mint(msg.sender, newItemId);
         _setTokenURI(
             newItemId,
-            append(
-                "https://gateway.pinata.cloud/ipfs",
-                bytes32ToStr(metadataIpfsHash)
-            )
+            append("gateway.pinata.cloud/ipfs", bytes32ToStr(metadataIpfsHash))
         );
         return newItemId;
     }

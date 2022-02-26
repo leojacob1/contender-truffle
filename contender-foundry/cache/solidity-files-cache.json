@@ -504,8 +504,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/Collection.sol": {
-      "lastModificationDate": 1645856757345,
-      "contentHash": "6039fde96ce40bc84a35912d1be76a6c",
+      "lastModificationDate": 1645909954563,
+      "contentHash": "527c88758b15375338a7fcbf2deacf50",
       "sourceName": "src/Collection.sol",
       "solcConfig": {
         "settings": {
@@ -600,8 +600,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/test/Contract.t.sol": {
-      "lastModificationDate": 1645761009611,
-      "contentHash": "7016738fe305fd90c36ea69a5cb2a78c",
+      "lastModificationDate": 1645910145533,
+      "contentHash": "e2547507a65a441099e61751dcb1aeeb",
       "sourceName": "src/test/Contract.t.sol",
       "solcConfig": {
         "settings": {
@@ -626,12 +626,27 @@
         }
       },
       "imports": [
-        "lib/ds-test/src/test.sol"
+        "lib/clones-with-immutable-args/src/Clone.sol",
+        "lib/clones-with-immutable-args/src/ClonesWithImmutableArgs.sol",
+        "lib/ds-test/src/test.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Address.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Counters.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol",
+        "src/Collection.sol",
+        "src/CollectionFactory.sol"
       ],
       "versionRequirement": "=0.8.10",
       "artifacts": {
-        "ContractTest": {
-          "0.8.10+commit.fc410830.Darwin.appleclang": "Contract.t.sol/ContractTest.json"
+        "CollectionFactoryTest": {
+          "0.8.10+commit.fc410830.Darwin.appleclang": "Contract.t.sol/CollectionFactoryTest.json"
         }
       }
     }
