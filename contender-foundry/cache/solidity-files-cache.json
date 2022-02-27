@@ -504,8 +504,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/Collection.sol": {
-      "lastModificationDate": 1645927566405,
-      "contentHash": "3d0735f8615bdcf772daab7592db7891",
+      "lastModificationDate": 1645932861474,
+      "contentHash": "39c854950b67dfda4011700a551a03d7",
       "sourceName": "src/Collection.sol",
       "solcConfig": {
         "settings": {
@@ -531,6 +531,7 @@
       },
       "imports": [
         "lib/clones-with-immutable-args/src/Clone.sol",
+        "lib/ds-test/src/test.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
@@ -551,8 +552,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/CollectionFactory.sol": {
-      "lastModificationDate": 1645925005304,
-      "contentHash": "0969becefc00e4e2dfe464fcb5f6e043",
+      "lastModificationDate": 1645932728248,
+      "contentHash": "5aa2a4883f10671f22c7ac6b860dba33",
       "sourceName": "src/CollectionFactory.sol",
       "solcConfig": {
         "settings": {
@@ -579,6 +580,7 @@
       "imports": [
         "lib/clones-with-immutable-args/src/Clone.sol",
         "lib/clones-with-immutable-args/src/ClonesWithImmutableArgs.sol",
+        "lib/ds-test/src/test.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
@@ -600,8 +602,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/test/Contract.t.sol": {
-      "lastModificationDate": 1645928225438,
-      "contentHash": "c649a8719a2412fe93b0baa3c846590c",
+      "lastModificationDate": 1645933912939,
+      "contentHash": "5494359f6ab9e688de9fe54d603f6758",
       "sourceName": "src/test/Contract.t.sol",
       "solcConfig": {
         "settings": {

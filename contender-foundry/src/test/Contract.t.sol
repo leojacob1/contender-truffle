@@ -28,6 +28,14 @@ contract CollectionFactoryTest is DSTest {
         }
     }
 
+    function append(string memory a, string memory b)
+        internal
+        pure
+        returns (string memory)
+    {
+        return string(abi.encodePacked(a, b));
+    }
+
     function setUp() public {
         collectionFactory = new CollectionFactory(new Collection());
     }
@@ -42,19 +50,43 @@ contract CollectionFactoryTest is DSTest {
             25,
             0x750EF1D7a0b4Ab1c97B7A623D7917CcEb5ea779C,
             "QmcTFvGz8MbtcWVY4gLRTA7HNNBf3jmZ8NcjpNdRYSAiRd",
-            "QmPxQPXXLrHZWUQQ3Z5DbyjntXtwFBdZPZRZxumZtmXBPc"
+            "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
         );
-        emit log_address(address(clone));
+        // emit log_address(address(clone));
         assertEq(clone.getCurrentTokenId(), 0);
         // cheats.prank(0x9bEF1f52763852A339471f298c6780e158E43A68);
         uint256 newTokenId = clone.mintNFT{value: 50000000000000000}();
         assertEq(newTokenId, 1);
-        emit log_address(clone.ownerOf(newTokenId));
+        // emit log_address(clone.ownerOf(newTokenId));
 
-        // emit log_address(clone.getAthleteAddress());
-        // emit log_address(clone.getAddressToPay());
-        // emit log_uint(clone.getPrice());
-        // emit log_uint(clone.getMaxSize());
-        // emit log(clone.getMetadataIpfsHash());
+        assertEq(
+            clone.getAthleteAddress(),
+            0x9bEF1f52763852A339471f298c6780e158E43A68
+        );
+        assertEq(
+            clone.getAddressToPay(),
+            0x750EF1D7a0b4Ab1c97B7A623D7917CcEb5ea779C
+        );
+        assertEq(clone.getPrice(), 50000000000000000);
+        assertEq(clone.getMaxSize(), 25);
+        assertEq(bytes(clone.getMetadataIpfsHash()).length, 46);
+        assertEq(
+            clone.getMetadataIpfsHash(),
+            "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
+        );
+        emit log(clone.tokenURI(1));
+    }
+
+    function testAppend() public {
+        string
+            memory ipfsHash = "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV";
+        bytes memory ipfsHashBytes = bytes(ipfsHash);
+        assertEq(
+            append(
+                "gateway.pinata.cloud/ipfs/",
+                "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
+            ),
+            "gateway.pinata.cloud/ipfs/QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
+        );
     }
 }

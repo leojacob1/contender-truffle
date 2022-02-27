@@ -24,16 +24,13 @@ contract Collection is Clone, ERC721URIStorage {
         return string(abi.encodePacked(a, b));
     }
 
-    function bytes32ToStr(bytes32 _bytes32)
-        public
-        pure
-        returns (string memory)
-    {
-        bytes memory bytesArray = new bytes(32);
-        for (uint256 i; i < 32; i++) {
-            bytesArray[i] = _bytes32[i];
+    function concat(bytes32 b1, bytes32 b2) public pure returns (bytes memory) {
+        bytes memory result = new bytes(46);
+        assembly {
+            mstore(add(result, 32), b1)
+            mstore(add(result, 64), b2)
         }
-        return string(bytesArray);
+        return result;
     }
 
     constructor() public ERC721("Collection", "CXN") {}
@@ -67,7 +64,14 @@ contract Collection is Clone, ERC721URIStorage {
         price = _getArgUint256(40);
         maxSize = _getArgUint256(72);
         addressToPay = _getArgAddress(20);
-        metadataIpfsHash = abi.encodePacked(_getArgUint256(104));
+
+        uint256[] memory uintArr = _getArgUint256Array(104, 3);
+        uint256 one = uintArr[0];
+        uint256 two = uintArr[1];
+        bytes32 metadataIpfsHashOne = bytes32(one);
+        bytes32 metadataIpfsHashTwo = bytes32(bytes14(bytes32(two)));
+        metadataIpfsHash = concat(metadataIpfsHashOne, metadataIpfsHashTwo);
+
         require(msg.value == price, "Insufficient funds");
         require(_tokenId._value < maxSize, "Collection is sold out");
         _tokenId.increment();
@@ -75,7 +79,7 @@ contract Collection is Clone, ERC721URIStorage {
         _mint(msg.sender, newItemId);
         _setTokenURI(
             newItemId,
-            append("gateway.pinata.cloud/ipfs", string(metadataIpfsHash))
+            append("gateway.pinata.cloud/ipfs/", string(metadataIpfsHash))
         );
         return newItemId;
     }
