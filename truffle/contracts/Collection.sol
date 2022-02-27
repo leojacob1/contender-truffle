@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Counters.sol";
-import "openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "clones-with-immutable-args/Clone.sol";
 
 contract Collection is Clone, ERC721URIStorage {
@@ -14,7 +14,7 @@ contract Collection is Clone, ERC721URIStorage {
     uint256 price;
     uint256 maxSize;
     address addressToPay;
-    bytes metadataIpfsHash;
+    bytes32 metadataIpfsHash;
 
     function append(string memory a, string memory b)
         internal
@@ -59,7 +59,7 @@ contract Collection is Clone, ERC721URIStorage {
     }
 
     function getMetadataIpfsHash() external view returns (string memory) {
-        return string(metadataIpfsHash);
+        return bytes32ToStr(metadataIpfsHash);
     }
 
     function mintNFT() external payable returns (uint256) {
@@ -67,15 +67,16 @@ contract Collection is Clone, ERC721URIStorage {
         price = _getArgUint256(40);
         maxSize = _getArgUint256(72);
         addressToPay = _getArgAddress(20);
-        metadataIpfsHash = abi.encodePacked(_getArgUint256(104));
+        metadataIpfsHash = bytes32(_getArgUint256(104));
         require(msg.value == price, "Insufficient funds");
         require(_tokenId._value < maxSize, "Collection is sold out");
         _tokenId.increment();
+
         uint256 newItemId = _tokenId.current();
         _mint(msg.sender, newItemId);
         _setTokenURI(
             newItemId,
-            append("gateway.pinata.cloud/ipfs", string(metadataIpfsHash))
+            append("gateway.pinata.cloud/ipfs", bytes32ToStr(metadataIpfsHash))
         );
         return newItemId;
     }

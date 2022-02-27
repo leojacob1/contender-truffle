@@ -504,8 +504,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/Collection.sol": {
-      "lastModificationDate": 1645909954563,
-      "contentHash": "527c88758b15375338a7fcbf2deacf50",
+      "lastModificationDate": 1645927566405,
+      "contentHash": "3d0735f8615bdcf772daab7592db7891",
       "sourceName": "src/Collection.sol",
       "solcConfig": {
         "settings": {
@@ -551,8 +551,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/CollectionFactory.sol": {
-      "lastModificationDate": 1645856749202,
-      "contentHash": "4e6a31c80a420c945812e86f799b4ea6",
+      "lastModificationDate": 1645925005304,
+      "contentHash": "0969becefc00e4e2dfe464fcb5f6e043",
       "sourceName": "src/CollectionFactory.sol",
       "solcConfig": {
         "settings": {
@@ -600,8 +600,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/test/Contract.t.sol": {
-      "lastModificationDate": 1645910145533,
-      "contentHash": "e2547507a65a441099e61751dcb1aeeb",
+      "lastModificationDate": 1645928225438,
+      "contentHash": "c649a8719a2412fe93b0baa3c846590c",
       "sourceName": "src/test/Contract.t.sol",
       "solcConfig": {
         "settings": {
@@ -645,6 +645,9 @@
       ],
       "versionRequirement": "=0.8.10",
       "artifacts": {
+        "CheatCodes": {
+          "0.8.10+commit.fc410830.Darwin.appleclang": "Contract.t.sol/CheatCodes.json"
+        },
         "CollectionFactoryTest": {
           "0.8.10+commit.fc410830.Darwin.appleclang": "Contract.t.sol/CollectionFactoryTest.json"
         }

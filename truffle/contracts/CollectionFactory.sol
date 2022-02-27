@@ -50,15 +50,14 @@ contract CollectionFactory {
         uint256 maxSize,
         address addressToPay,
         string memory imageIpfsHash,
-        string memory metadataIpfsHash
+        bytes32 metadataIpfsHash
     ) external returns (Collection) {
-        bytes memory metadataIpfsHashBytes = bytes(metadataIpfsHash);
         bytes memory data = abi.encodePacked(
             athleteAddress,
             addressToPay,
             price,
             maxSize,
-            metadataIpfsHashBytes
+            metadataIpfsHash
         );
         Collection clone = Collection(address(implementation).clone(data));
         emit NewCollection(
@@ -70,7 +69,7 @@ contract CollectionFactory {
             maxSize,
             addressToPay,
             imageIpfsHash,
-            metadataIpfsHash,
+            bytes32ToStr(metadataIpfsHash),
             address(clone)
         );
         return clone;
