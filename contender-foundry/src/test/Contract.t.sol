@@ -74,18 +74,8 @@ contract CollectionFactoryTest is DSTest {
             clone.getMetadataIpfsHash(),
             "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
         );
-        emit log(clone.tokenURI(1));
-    }
-
-    function testAppend() public {
-        string
-            memory ipfsHash = "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV";
-        bytes memory ipfsHashBytes = bytes(ipfsHash);
         assertEq(
-            append(
-                "gateway.pinata.cloud/ipfs/",
-                "QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
-            ),
+            clone.tokenURI(1),
             "gateway.pinata.cloud/ipfs/QmZT2s1bghncPAmfMjZ3j1LhtjMXSECrMSLRXit6swfYAV"
         );
     }

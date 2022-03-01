@@ -65,7 +65,7 @@ contract Collection is Clone, ERC721URIStorage {
         maxSize = _getArgUint256(72);
         addressToPay = _getArgAddress(20);
 
-        uint256[] memory uintArr = _getArgUint256Array(104, 3);
+        uint256[] memory uintArr = _getArgUint256Array(104, 2);
         uint256 one = uintArr[0];
         uint256 two = uintArr[1];
         bytes32 metadataIpfsHashOne = bytes32(one);
@@ -79,7 +79,10 @@ contract Collection is Clone, ERC721URIStorage {
         _mint(msg.sender, newItemId);
         _setTokenURI(
             newItemId,
-            append("gateway.pinata.cloud/ipfs/", string(metadataIpfsHash))
+            append(
+                "https://gateway.pinata.cloud/ipfs/",
+                string(metadataIpfsHash)
+            )
         );
         return newItemId;
     }

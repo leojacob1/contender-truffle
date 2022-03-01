@@ -504,8 +504,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/Collection.sol": {
-      "lastModificationDate": 1645932861474,
-      "contentHash": "39c854950b67dfda4011700a551a03d7",
+      "lastModificationDate": 1646178142613,
+      "contentHash": "a61fb7133e81a18056cd5a707b762abf",
       "sourceName": "src/Collection.sol",
       "solcConfig": {
         "settings": {
@@ -531,7 +531,6 @@
       },
       "imports": [
         "lib/clones-with-immutable-args/src/Clone.sol",
-        "lib/ds-test/src/test.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
@@ -552,8 +551,8 @@
       }
     },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/CollectionFactory.sol": {
-      "lastModificationDate": 1645932728248,
-      "contentHash": "5aa2a4883f10671f22c7ac6b860dba33",
+      "lastModificationDate": 1645935635612,
+      "contentHash": "0969becefc00e4e2dfe464fcb5f6e043",
       "sourceName": "src/CollectionFactory.sol",
       "solcConfig": {
         "settings": {
@@ -580,7 +579,6 @@
       "imports": [
         "lib/clones-with-immutable-args/src/Clone.sol",
         "lib/clones-with-immutable-args/src/ClonesWithImmutableArgs.sol",
-        "lib/ds-test/src/test.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
         "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
@@ -601,9 +599,56 @@
         }
       }
     },
+    "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/CollectionTest.sol": {
+      "lastModificationDate": 1646177575416,
+      "contentHash": "9b0460866c34337a62f9af91d446a580",
+      "sourceName": "src/CollectionTest.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london"
+        }
+      },
+      "imports": [
+        "lib/clones-with-immutable-args/src/Clone.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Address.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Context.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Counters.sol",
+        "lib/openzeppelin-contracts/contracts/utils/Strings.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol",
+        "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol"
+      ],
+      "versionRequirement": "^0.8.4",
+      "artifacts": {
+        "CollectionTest": {
+          "0.8.10+commit.fc410830.Darwin.appleclang": "CollectionTest.sol/CollectionTest.json"
+        }
+      }
+    },
     "/Users/leojacoby/Hacking/crypto/holiday-cards/contender-foundry/src/test/Contract.t.sol": {
-      "lastModificationDate": 1645933912939,
-      "contentHash": "5494359f6ab9e688de9fe54d603f6758",
+      "lastModificationDate": 1646120869060,
+      "contentHash": "9a520d6eff1985ca2514a9ae1db3a576",
       "sourceName": "src/test/Contract.t.sol",
       "solcConfig": {
         "settings": {
